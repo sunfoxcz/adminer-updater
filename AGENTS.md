@@ -2,7 +2,7 @@
 
 ## Project Structure
 
-`update-adminer.php` is the PHP CLI entry point. It reads the latest version from adminer.org and compares it with the version in the specified Adminer PHP file. When an update is needed, the script downloads the full release from GitHub to a sibling `.tmp` file, backs up the previous installation with a `.bak` suffix, and moves the download into place. Make updater changes in `update-adminer.php`.
+`update-adminer.php` contains the CLI entry point, version detection, download, and file replacement. User-facing setup and operation are documented in [README.md](README.md).
 
 ## Development Commands
 
@@ -13,13 +13,9 @@ docker run --rm --volume "$PWD:/app:ro" --workdir /app \
   --entrypoint php sunfoxcz/php:cli -l update-adminer.php
 ```
 
-Pass the required file path as a positional argument. Relative paths resolve from the working directory. Use `--` before a path that starts with `-`.
-
-The updater returns `0` on success, including when no update is needed, and `1` on failure. Errors go to stderr. Pass `-v` or `--verbose` to show progress.
-
 ## Coding Style
 
-Keep the updater compatible with PHP 7.4. Follow the script's four-space indentation, strict types, and explicit parameter and return types. Use camelCase for functions and variables, and uppercase snake case for constants. Use `info()` for verbose progress and `error()` for error messages.
+Keep the updater compatible with the minimum PHP version listed in the README. Follow the script's four-space indentation, strict types, and explicit parameter and return types. Use camelCase for functions and variables, and uppercase snake case for constants. Use `info()` for verbose progress and `error()` for error messages.
 
 ## Testing
 
